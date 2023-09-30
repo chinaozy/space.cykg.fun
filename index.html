@@ -8,10 +8,10 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@900&display=swap" rel="stylesheet" />
         <link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;700&display=swap" rel="stylesheet" />
-        <link rel="icon" href="img/favicon.ico" />
+        <link rel="icon" href="src/img/favicon.ico" />
         <link href="/dist/output.css" rel="stylesheet" />
     </head>
-    <body x-data="{panelIsUp: false, nowCard: '', panelToggle() { this.panelIsUp = ! this.panelIsUp } }" class="h-screen bg-no-repeat bg-cover bg-center" style="background-image: url('img/bg-1.png')">
+    <body x-data="{panelIsUp: false, nowCard: '', panelToggle() { this.panelIsUp = ! this.panelIsUp } }" class="h-screen bg-no-repeat bg-cover bg-center" style="background-image: url('src/img/bg-1.png')">
         <h1 :class="panelIsUp ? 'top-[8%] text-6xl w-full' : 'top-1/4 text-7xl'" class="absolute text-center font-orbitron top-1/4 left-1/2 ab-cntr text-yellow-400 title-sd leading-none">KG SPACE</h1>
         <button
             x-show="!panelIsUp"
@@ -32,18 +32,18 @@
                     <div class="flex m-auto h-32 bg-gradient-to-r from-pink-500 to-violet-500 rounded-lg overflow-hidden">
                         <!-- head-img -->
                         <div @click="cardToggle('main')" class="flex-none">
-                            <img class="h-full" src="img/card-1-0.png" alt="AI KG" />
+                            <img class="h-full" src="src/img/card-1-0.png" alt="AI KG" />
                             <p class="relative left-2 bottom-10 font-bold text-amber-500 text-3xl text-sd hover:underline">AI KG</p>
                         </div>
                         <div class="flex-none w-3"></div>
                         <!-- img-card-row -->
                         <div class="flex flex-row w-full py-3 overflow-x-scroll">
                             <div @click="cardToggle('card1')" class="flex-none rounded-lg overflow-hidden mx-2">
-                                <img class="h-full" src="img/card-1-1.png" alt="丛雨KG" />
+                                <img class="h-full" src="src/img/card-1-1.png" alt="丛雨KG" />
                                 <p class="relative left-2 bottom-7 font-bold text-amber-500 text-lg text-sd hover:underline">丛雨KG</p>
                             </div>
                             <div @click="cardToggle('card2')" class="flex-none rounded-lg overflow-hidden mx-2">
-                                <img class="h-full" src="img/card-1-2.png" alt="天音KG" />
+                                <img class="h-full" src="src/img/card-1-2.png" alt="天音KG" />
                                 <p class="relative left-2 bottom-7 font-bold text-amber-500 text-lg text-sd hover:underline">天音KG</p>
                             </div>
                         </div>
@@ -58,14 +58,14 @@
                         <div x-data="cardPages('main')" x-show="cardIsShow()" class="p-4">
                             <h1 class="font-bold text-amber-500 text-4xl text-sd">AI KG</h1>
                             <p class="my-2">基于so-vits-svc 4.0</p>
-                            <div class="w-full h-20 my-4 bg-cover bg-center rounded-md overflow-hidden" style="background-image: url(img/card-1-1.png)">
+                            <div class="w-full h-20 my-4 bg-cover bg-center rounded-md overflow-hidden" style="background-image: url(src/img/card-1-1.png)">
                                 <div @click="cardToggle('card1')" class="flex h-full w-full backdrop-blur-sm rounded-md">
                                     <p class="m-6 font-bold text-amber-500 text-2xl text-sd hover:underline">丛雨KG</p>
                                     <div class="grow"></div>
                                     <p class="m-6 align-middle font-bold text-amber-500 text-2xl text-sd">></p>
                                 </div>
                             </div>
-                            <div  class="w-full h-20 my-4 bg-cover bg-center rounded-md overflow-hidden" style="background-image: url(img/card-1-2.png)">
+                            <div  class="w-full h-20 my-4 bg-cover bg-center rounded-md overflow-hidden" style="background-image: url(src/img/card-1-2.png)">
                                 <div @click="cardToggle('card2')" class="flex h-full w-full backdrop-blur-sm rounded-md">
                                     <p class="m-6 font-bold text-amber-500 text-2xl text-sd hover:underline">天音KG</p>
                                     <div class="grow"></div>
@@ -78,19 +78,19 @@
                         <div x-data="cardPages('card1')" x-show="cardIsShow()" class="p-4">
                             <h1 class="font-bold text-amber-500 text-4xl text-sd">丛雨KG</h1>
                             <p class="my-2">AI KG成名之作</p>
-                            <img class="my-2 w-2/3 rounded-lg" src="img/card-1-1.png" alt="丛雨KG" />
-                            <audio class="my-2" controls src="aud/card-1-1.mp3"></audio>
+                            <img class="my-2 w-2/3 rounded-lg" src="src/img/card-1-1.png" alt="丛雨KG" />
+                            <audio class="my-2" controls src="src/aud/card-1-1.mp3"></audio>
                             <div class="h-4"></div>
                             <p class="my-2 font-bold text-amber-500 text-2xl text-sd">派对里的丛雨KG</p>
                             <p class="my-2">难蚌</p>
-                            <video class="w-2/3 rounded-lg" controls src="vid/card-1-1.mp4"></video>
+                            <video class="w-2/3 rounded-lg" controls src="src/vid/card-1-1.mp4"></video>
                         </div>
 
                         <!-- card2 -->
                         <div x-data="cardPages('card2')" x-show="cardIsShow()" class="p-4">
                             <h1 class="font-bold text-amber-500 text-4xl text-sd">天音KG</h1>
                             <p class="my-2">AI KG配音中...</p>
-                            <video class="rounded-lg" controls src="vid/card-1-2.mp4"></video>
+                            <video class="rounded-lg" controls src="src/vid/card-1-2.mp4"></video>
                         </div>
                     </div>
                 </div>
@@ -101,18 +101,18 @@
                     <div class="flex m-auto h-32 bg-gradient-to-r from-lime-500 to-cyan-500 rounded-lg overflow-hidden">
                         <!-- head-img -->
                         <div @click="cardToggle('main')" class="flex-none">
-                            <img class="h-full" src="img/card-2-0.png" alt="RAP KG" />
+                            <img class="h-full" src="src/img/card-2-0.png" alt="RAP KG" />
                             <p class="relative left-2 bottom-10 font-bold text-amber-500 text-3xl text-sd hover:underline">RAP KG</p>
                         </div>
                         <div class="flex-none w-3"></div>
                         <!-- img-card-row -->
                         <div class="flex flex-row w-full py-3 overflow-x-scroll">
                             <div @click="cardToggle('card1')" class="flex-none rounded-lg overflow-hidden mx-2">
-                                <img class="h-full" src="img/card-2-1.png" alt="KG RAP" />
+                                <img class="h-full" src="src/img/card-2-1.png" alt="KG RAP" />
                                 <p class="relative left-2 bottom-7 font-bold text-amber-500 text-lg text-sd hover:underline">KG RAP</p>
                             </div>
                             <div @click="cardToggle('card2')" class="flex-none rounded-lg overflow-hidden mx-2">
-                                <img class="h-full" src="img/card-2-2.png" alt="延误KG" />
+                                <img class="h-full" src="src/img/card-2-2.png" alt="延误KG" />
                                 <p class="relative left-2 bottom-7 font-bold text-amber-500 text-lg text-sd hover:underline">延误KG</p>
                             </div>
                         </div>
@@ -127,14 +127,14 @@
                         <div x-data="cardPages('main')" x-show="cardIsShow()" class="p-4">
                             <h1 class="font-bold text-amber-500 text-4xl text-sd">RAP KG</h1>
                             <p class="my-2">贼帅</p>
-                            <div class="w-full h-20 my-4 bg-cover bg-center rounded-md overflow-hidden" style="background-image: url(img/card-2-1.png)">
+                            <div class="w-full h-20 my-4 bg-cover bg-center rounded-md overflow-hidden" style="background-image: url(src/img/card-2-1.png)">
                                 <div @click="cardToggle('card1')" class="flex h-full w-full backdrop-blur-sm rounded-md">
                                     <p class="m-6 font-bold text-amber-500 text-2xl text-sd hover:underline">KG RAP</p>
                                     <div class="grow"></div>
                                     <p class="m-6 align-middle font-bold text-amber-500 text-2xl text-sd">></p>
                                 </div>
                             </div>
-                            <div  class="w-full h-20 my-4 bg-cover bg-center rounded-md overflow-hidden" style="background-image: url(img/card-2-2.png)">
+                            <div  class="w-full h-20 my-4 bg-cover bg-center rounded-md overflow-hidden" style="background-image: url(src/img/card-2-2.png)">
                                 <div @click="cardToggle('card2')" class="flex h-full w-full backdrop-blur-sm rounded-md">
                                     <p class="m-6 font-bold text-amber-500 text-2xl text-sd hover:underline">延误KG</p>
                                     <div class="grow"></div>
@@ -147,14 +147,14 @@
                         <div x-data="cardPages('card1')" x-show="cardIsShow()" class="p-4">
                             <h1 class="mb-2 font-bold text-amber-500 text-4xl text-sd">KG RAP</h1>
                             <a class="text-amber-500 underline" href="https://mp.weixin.qq.com/s/OiVqXwgml67M5mv9XYYBsA">挥洒青春，拥抱梦想——记昆仑学校九年级线上级会暨中考20天冲刺动员大会</a><span> 节选</span>
-                            <video class="my-2 rounded-lg" controls src="vid/card-2-1.mp4"></video>
+                            <video class="my-2 rounded-lg" controls src="src/vid/card-2-1.mp4"></video>
                         </div>
 
                         <!-- card2 -->
                         <div x-data="cardPages('card2')" x-show="cardIsShow()" class="p-4">
                             <h1 class="font-bold text-amber-500 text-4xl text-sd">延误KG</h1>
                             <p class="my-2">人力调得有点烂...</p>
-                            <video class="rounded-lg" controls src="vid/card-2-2.mp4"></video>
+                            <video class="rounded-lg" controls src="src/vid/card-2-2.mp4"></video>
                         </div>
                     </div>
                 </div>
@@ -164,6 +164,6 @@
         </div>
 
         <script src="//unpkg.com/alpinejs" defer></script>
-        <script src="main.js"></script>
+        <script src="src/main.js"></script>
     </body>
 </html>
