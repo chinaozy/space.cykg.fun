@@ -1,0 +1,44 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Onest:wght@400;700&display=swap');
+
+@layer base {
+    html {
+      font-family: Onest, system-ui, sans-serif;
+      -webkit-tap-highlight-color:rgba(0,0,0,0);
+    }
+}
+
+@layer utilities {
+    .underline {
+        text-decoration-line: underline;
+        text-underline-offset: 0.2rem;
+    }
+    .text-sd {
+        text-shadow: 0.1rem 0.1rem 0.1rem rgb(128, 0, 128);
+    }
+    .title-sd {
+        text-shadow: 0.4rem 0.4rem rgb(128, 0, 128),
+                     0.4rem 0.4rem 1.2rem rgb(128, 0, 128);
+    }
+    .box-sd {
+        box-shadow: 0.4rem 0.4rem 1.2rem rgb(95, 0, 95);
+    }
+    .ab-cntr{
+        transform:translate(-50%,-50%);
+    }
+
+    /* Hide scrollbar for Chrome, Safari and Opera */
+    .no-scrollbar::-webkit-scrollbar {
+        display: none;
+    }
+
+    /* Hide scrollbar for IE, Edge and Firefox */
+    .no-scrollbar {
+        -ms-overflow-style: none;  /* IE and Edge */
+        scrollbar-width: none;  /* Firefox */
+    }
+}
