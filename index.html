@@ -1,169 +1,401 @@
 <!DOCTYPE html>
 <html lang="zh-Hans-CN">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>KG SPACE</title>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@900&display=swap" rel="stylesheet" />
-        <link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;700&display=swap" rel="stylesheet" />
-        <link rel="icon" href="src/img/favicon.ico" />
-        <link href="/dist/output.css" rel="stylesheet" />
-    </head>
-    <body x-data="{panelIsUp: false, nowCard: '', panelToggle() { this.panelIsUp = ! this.panelIsUp } }" class="h-screen bg-no-repeat bg-cover bg-center" style="background-image: url('src/img/bg-1.png')">
-        <h1 :class="panelIsUp ? 'top-[8%] text-6xl w-full' : 'top-1/4 text-7xl'" class="absolute text-center font-orbitron top-1/4 left-1/2 ab-cntr text-yellow-400 title-sd leading-none">KG SPACE</h1>
-        <button
-            x-show="!panelIsUp"
-            @click="panelToggle()"
-            class="absolute ab-cntr left-1/2 top-1/2 bg-white py-4 w-48 rounded-md border-4 border-yellow-400 text-2xl text-amber-500 hover:bg-yellow-400 hover:text-white hover:box-sd font-bold cursor-pointer"
-        >
-            开始探索
-        </button>
-        <div :class="panelIsUp ? 'top-[16%]' : 'top-2/3'" class="absolute bottom-0 w-screen backdrop-blur-md bg-gray-100/40 rounded-t-lg overflow-hidden">
-            <div @click="panelToggle()" class="py-4 w-full backdrop-blur-xl bg-white/40 cursor-pointer">
-                <div class="block m-auto w-14 h-2 bg-gray-500 rounded-xl shadow-md cursor-pointer pointer-events-none"></div>
-            </div>
-            <div class="relative h-full container overflow-scroll no-scrollbar">
 
-                <!-- cardOne -->
-                <div x-effect="cardClose()" x-data="cardData('cardOne')" class="relative w-11/12 m-auto my-4 bg-white rounded-lg">
-                    <!-- top-bar -->
-                    <div class="flex m-auto h-32 bg-gradient-to-r from-pink-500 to-violet-500 rounded-lg overflow-hidden">
-                        <!-- head-img -->
-                        <div @click="cardToggle('main')" class="flex-none">
-                            <img class="h-full" src="src/img/card-1-0.png" alt="AI KG" />
-                            <p class="relative left-2 bottom-10 font-bold text-amber-500 text-3xl text-sd hover:underline">AI KG</p>
-                        </div>
-                        <div class="flex-none w-3"></div>
-                        <!-- img-card-row -->
-                        <div class="flex flex-row w-full py-3 overflow-x-scroll">
-                            <div @click="cardToggle('card1')" class="flex-none rounded-lg overflow-hidden mx-2">
-                                <img class="h-full" src="src/img/card-1-1.png" alt="丛雨KG" />
-                                <p class="relative left-2 bottom-7 font-bold text-amber-500 text-lg text-sd hover:underline">丛雨KG</p>
-                            </div>
-                            <div @click="cardToggle('card2')" class="flex-none rounded-lg overflow-hidden mx-2">
-                                <img class="h-full" src="src/img/card-1-2.png" alt="天音KG" />
-                                <p class="relative left-2 bottom-7 font-bold text-amber-500 text-lg text-sd hover:underline">天音KG</p>
-                            </div>
-                        </div>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>KG SPACE</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@900&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@100..900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sakana-widget@2.7.0/lib/sakana.min.css" />
+    <link rel="icon" href="src/img/favicon.ico" />
+    <link href="/dist/output.css" rel="stylesheet" />
+</head>
 
-                        <div @click="cardOpen()"  class="flex-none h-max w-10 py-12">
-                            <p x-text="cardSymbol" class="text-center text-white font-bold text-2xl"></p>
-                        </div>
-                    </div>
+<body x-data="{panelIsUp: false, nowCard: '', panelToggle() { this.panelIsUp = ! this.panelIsUp } }"
+    class="h-screen bg-no-repeat bg-cover bg-center" style="background-image: url('src/img/bg.svg')">
+    <div x-data="{open: false}" x-transition.duration.500ms x-show="open"
+        class="absolute left-0 top-0 w-full h-full z-10 bg-purple-100 text-center">
+        <p class="mt-[48vh]">Loading...</p>
+    </div>
 
-                    <div :class="cardIsOpen ? 'max-h-[54vh]' : '' " class="overflow-y-auto no-scrollbar">
-                        <!-- main -->
-                        <div x-data="cardPages('main')" x-show="cardIsShow()" class="p-4">
-                            <h1 class="font-bold text-amber-500 text-4xl text-sd">AI KG</h1>
-                            <p class="my-2">基于so-vits-svc 4.0</p>
-                            <div class="w-full h-20 my-4 bg-cover bg-center rounded-md overflow-hidden" style="background-image: url(src/img/card-1-1.png)">
-                                <div @click="cardToggle('card1')" class="flex h-full w-full backdrop-blur-sm rounded-md">
-                                    <p class="m-6 font-bold text-amber-500 text-2xl text-sd hover:underline">丛雨KG</p>
-                                    <div class="grow"></div>
-                                    <p class="m-6 align-middle font-bold text-amber-500 text-2xl text-sd">></p>
-                                </div>
-                            </div>
-                            <div  class="w-full h-20 my-4 bg-cover bg-center rounded-md overflow-hidden" style="background-image: url(src/img/card-1-2.png)">
-                                <div @click="cardToggle('card2')" class="flex h-full w-full backdrop-blur-sm rounded-md">
-                                    <p class="m-6 font-bold text-amber-500 text-2xl text-sd hover:underline">天音KG</p>
-                                    <div class="grow"></div>
-                                    <p class="m-6 align-middle font-bold text-amber-500 text-2xl text-sd">></p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- card1 -->
-                        <div x-data="cardPages('card1')" x-show="cardIsShow()" class="p-4">
-                            <h1 class="font-bold text-amber-500 text-4xl text-sd">丛雨KG</h1>
-                            <p class="my-2">AI KG成名之作</p>
-                            <img class="my-2 w-2/3 rounded-lg" src="src/img/card-1-1.png" alt="丛雨KG" />
-                            <audio class="my-2" controls src="src/aud/card-1-1.mp3"></audio>
-                            <div class="h-4"></div>
-                            <p class="my-2 font-bold text-amber-500 text-2xl text-sd">派对里的丛雨KG</p>
-                            <p class="my-2">难蚌</p>
-                            <video class="w-2/3 rounded-lg" controls src="src/vid/card-1-1.mp4"></video>
-                        </div>
-
-                        <!-- card2 -->
-                        <div x-data="cardPages('card2')" x-show="cardIsShow()" class="p-4">
-                            <h1 class="font-bold text-amber-500 text-4xl text-sd">天音KG</h1>
-                            <p class="my-2">AI KG配音中...</p>
-                            <video class="rounded-lg" controls src="src/vid/card-1-2.mp4"></video>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- cardTwo -->
-                <div x-effect="cardClose()" x-data="cardData('cardTwo')" class="relative w-11/12 m-auto my-4 bg-white rounded-lg">
-                    <!-- top-bar -->
-                    <div class="flex m-auto h-32 bg-gradient-to-r from-lime-500 to-cyan-500 rounded-lg overflow-hidden">
-                        <!-- head-img -->
-                        <div @click="cardToggle('main')" class="flex-none">
-                            <img class="h-full" src="src/img/card-2-0.png" alt="RAP KG" />
-                            <p class="relative left-2 bottom-10 font-bold text-amber-500 text-3xl text-sd hover:underline">RAP KG</p>
-                        </div>
-                        <div class="flex-none w-3"></div>
-                        <!-- img-card-row -->
-                        <div class="flex flex-row w-full py-3 overflow-x-scroll">
-                            <div @click="cardToggle('card1')" class="flex-none rounded-lg overflow-hidden mx-2">
-                                <img class="h-full" src="src/img/card-2-1.png" alt="KG RAP" />
-                                <p class="relative left-2 bottom-7 font-bold text-amber-500 text-lg text-sd hover:underline">KG RAP</p>
-                            </div>
-                            <div @click="cardToggle('card2')" class="flex-none rounded-lg overflow-hidden mx-2">
-                                <img class="h-full" src="src/img/card-2-2.png" alt="延误KG" />
-                                <p class="relative left-2 bottom-7 font-bold text-amber-500 text-lg text-sd hover:underline">延误KG</p>
-                            </div>
-                        </div>
-
-                        <div @click="cardOpen()"  class="flex-none h-max w-10 py-12">
-                            <p x-text="cardSymbol" class="text-center text-white font-bold text-2xl"></p>
-                        </div>
-                    </div>
-
-                    <div :class="cardIsOpen ? 'max-h-[54vh]' : '' " class="overflow-y-auto no-scrollbar">
-                        <!-- main -->
-                        <div x-data="cardPages('main')" x-show="cardIsShow()" class="p-4">
-                            <h1 class="font-bold text-amber-500 text-4xl text-sd">RAP KG</h1>
-                            <p class="my-2">贼帅</p>
-                            <div class="w-full h-20 my-4 bg-cover bg-center rounded-md overflow-hidden" style="background-image: url(src/img/card-2-1.png)">
-                                <div @click="cardToggle('card1')" class="flex h-full w-full backdrop-blur-sm rounded-md">
-                                    <p class="m-6 font-bold text-amber-500 text-2xl text-sd hover:underline">KG RAP</p>
-                                    <div class="grow"></div>
-                                    <p class="m-6 align-middle font-bold text-amber-500 text-2xl text-sd">></p>
-                                </div>
-                            </div>
-                            <div  class="w-full h-20 my-4 bg-cover bg-center rounded-md overflow-hidden" style="background-image: url(src/img/card-2-2.png)">
-                                <div @click="cardToggle('card2')" class="flex h-full w-full backdrop-blur-sm rounded-md">
-                                    <p class="m-6 font-bold text-amber-500 text-2xl text-sd hover:underline">延误KG</p>
-                                    <div class="grow"></div>
-                                    <p class="m-6 align-middle font-bold text-amber-500 text-2xl text-sd">></p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- card1 -->
-                        <div x-data="cardPages('card1')" x-show="cardIsShow()" class="p-4">
-                            <h1 class="mb-2 font-bold text-amber-500 text-4xl text-sd">KG RAP</h1>
-                            <a class="text-amber-500 underline" href="https://mp.weixin.qq.com/s/OiVqXwgml67M5mv9XYYBsA">挥洒青春，拥抱梦想——记昆仑学校九年级线上级会暨中考20天冲刺动员大会</a><span> 节选</span>
-                            <video class="my-2 rounded-lg" controls src="src/vid/card-2-1.mp4"></video>
-                        </div>
-
-                        <!-- card2 -->
-                        <div x-data="cardPages('card2')" x-show="cardIsShow()" class="p-4">
-                            <h1 class="font-bold text-amber-500 text-4xl text-sd">延误KG</h1>
-                            <p class="my-2">人力调得有点烂...</p>
-                            <video class="rounded-lg" controls src="src/vid/card-2-2.mp4"></video>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="h-10"></div>
+    <h1 :class="panelIsUp ? 'top-[8%] text-6xl lg:text-7xl 2xl:text-8xl' : 'top-1/4 text-7xl lg:text-8xl 2xl:text-9xl'"
+        class="trans absolute text-center font-orbitron top-1/4 left-1/2 w-full ab-cntr text-yellow-400 title pr-[2vh] leading-none">
+        KG SPACE</h1>
+    <button x-transition x-show="!panelIsUp" @click="panelToggle()"
+        class="trans absolute m-auto left-0 top-0 right-0 bottom-0 bg-gray py-4 w-44 h-20 rounded-2xl cntr-button text-2xl font-bold cursor-pointer">
+        开始探索
+    </button>
+    <div :class="panelIsUp ? 'top-[16%]' : 'top-2/3'"
+        class="trans absolute m-auto left-0 right-0 bottom-0 w-screen sm:w-[640px] backdrop-blur-md bg-purple-200/40 rounded-t-lg overflow-hidden shadow-lg">
+        <div @click="panelToggle()" class="py-4 w-full backdrop-blur-xl bg-purple-300/40 cursor-pointer">
+            <div class="block m-auto w-14 h-2 bg-gray-500 rounded-xl shadow-md cursor-pointer pointer-events-none">
             </div>
         </div>
+        <div class="relative h-full container overflow-scroll no-scrollbar">
 
-        <script src="//unpkg.com/alpinejs" defer></script>
-        <script src="src/main.js"></script>
-    </body>
+            <div x-data="{show: true}" @click="show=false" x-transition.duration.100ms x-show="show" class="relative h-10 w-11/12 m-auto my-6 bg-[#ffdadb] rounded-lg shadow-sm text-center">
+                <p class="pt-2">温馨提示：卡片可以横向滑动 （点击关闭）</p>
+            </div>
+
+            <!-- cardOne -->
+            <div x-effect="cardClose()" x-data="cardData('cardOne')"
+                class="relative w-11/12 m-auto my-6 bg-white rounded-lg shadow-lg">
+                <!-- top-bar -->
+                <div class="flex m-auto h-32 bg-gradient-to-r from-pink-500 to-violet-500 rounded-lg overflow-hidden">
+                    <!-- head-img -->
+                    <div @click="cardToggle('main')" class="flex-none">
+                        <img class="h-full" src="src/img/card-1-0.png" alt="AI KG" />
+                        <p class="relative left-2 bottom-10 font-bold text-amber-500 text-3xl text-sd hover:underline">
+                            AI KG</p>
+                    </div>
+                    <div class="flex-none w-3"></div>
+                    <!-- img-card-row -->
+                    <div class="flex flex-row w-full py-3 overflow-x-auto no-scrollbar box">
+                        <div @click="cardToggle('card1')" class="flex-none rounded-lg overflow-hidden mx-2 shadow-md">
+                            <img class="h-full" src="src/img/card-1-1.png" alt="丛雨KG" />
+                            <p
+                                class="relative left-2 bottom-7 font-bold text-amber-500 text-lg text-sd hover:underline">
+                                丛雨KG</p>
+                        </div>
+                        <div @click="cardToggle('card2')" class="flex-none rounded-lg overflow-hidden mx-2 shadow-md">
+                            <img class="h-full" src="src/img/card-1-2.png" alt="天音KG" />
+                            <p
+                                class="relative left-2 bottom-7 font-bold text-amber-500 text-lg text-sd hover:underline">
+                                天音KG</p>
+                        </div>
+                        <div @click="cardToggle('card3')" class="flex-none rounded-lg overflow-hidden mx-2 shadow-md">
+                            <img class="h-full" src="src/img/card-1-3.png" alt="其他KG" />
+                            <p
+                                class="relative left-2 bottom-7 font-bold text-amber-500 text-lg text-sd hover:underline">
+                                其他KG</p>
+                        </div>
+                    </div>
+
+                    <div @click="cardOpen()" class="flex-none h-max w-10 py-12">
+                        <p x-text="cardSymbol" class="text-center text-white font-bold text-2xl"></p>
+                    </div>
+                </div>
+
+                <div :class="cardIsOpen ? 'max-h-[54vh]' : 'max-h-0' " class="trans overflow-y-auto no-scrollbar">
+                    <!-- main -->
+                    <div x-data="cardPages('main')" x-transition.origin.top x-show="cardIsShow()" class="p-4">
+                        <h1 class="font-bold text-amber-500 text-4xl text-sd">AI KG</h1>
+                        <p class="my-2">基于so-vits-svc 4.0</p>
+                        <div class="w-full h-20 my-4 bg-cover bg-center rounded-md overflow-hidden"
+                            style="background-image: url(src/img/card-1-1.png)">
+                            <div @click="cardToggle('card1')" class="flex h-full w-full backdrop-blur-sm rounded-md">
+                                <p class="m-6 font-bold text-amber-500 text-2xl text-sd hover:underline">丛雨KG</p>
+                                <div class="grow"></div>
+                                <p class="m-6 align-middle font-bold text-amber-500 text-2xl text-sd">></p>
+                            </div>
+                        </div>
+                        <div class="w-full h-20 my-4 bg-cover bg-center rounded-md overflow-hidden"
+                            style="background-image: url(src/img/card-1-2.png)">
+                            <div @click="cardToggle('card2')" class="flex h-full w-full backdrop-blur-sm rounded-md">
+                                <p class="m-6 font-bold text-amber-500 text-2xl text-sd hover:underline">天音KG</p>
+                                <div class="grow"></div>
+                                <p class="m-6 align-middle font-bold text-amber-500 text-2xl text-sd">></p>
+                            </div>
+                        </div>
+                        <div class="w-full h-20 my-4 bg-cover bg-center rounded-md overflow-hidden"
+                            style="background-image: url(src/img/card-1-3.png)">
+                            <div @click="cardToggle('card3')" class="flex h-full w-full backdrop-blur-sm rounded-md">
+                                <p class="m-6 font-bold text-amber-500 text-2xl text-sd hover:underline">其他KG</p>
+                                <div class="grow"></div>
+                                <p class="m-6 align-middle font-bold text-amber-500 text-2xl text-sd">></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- card1 -->
+                    <div x-data="cardPages('card1')" x-transition.origin.top x-show="cardIsShow()" class="p-4">
+                        <h1 class="font-bold text-amber-500 text-4xl text-sd">丛雨KG</h1>
+                        <p class="my-2">Ciallo～(∠・ω< )⌒☆</p>
+                        <img class="my-2 w-[256px] rounded-lg" src="src/img/card-1-1.png" alt="丛雨KG" />
+                        <audio class="my-2" controls src="src/aud/card-1-1.mp3"></audio>
+                        <div class="h-4"></div>
+                        <p class="my-2 font-bold text-amber-500 text-2xl text-sd">派对里的丛雨KG</p>
+                        <p class="my-2">感谢KG先生的献唱</p>
+                        <video class="w-[256px] rounded-lg" controls src="src/vid/card-1-1.mp4"></video>
+                    </div>
+
+                    <!-- card2 -->
+                    <div x-data="cardPages('card2')" x-transition.origin.top x-show="cardIsShow()" class="p-4">
+                        <h1 class="font-bold text-amber-500 text-4xl text-sd">天音KG</h1>
+                        <p class="my-2">AI KG配音中...</p>
+                        <video class="rounded-lg" controls src="src/vid/card-1-2.mp4"></video>
+                    </div>
+
+                    <!-- card3 -->
+                    <div x-data="cardPages('card3')" x-transition.origin.top x-show="cardIsShow()" class="p-4">
+                        <h1 class="font-bold text-amber-500 text-4xl text-sd">蚂蚁KG</h1>
+                        <p class="my-2">虽然不是歌唱AI 但是也算AI KG</p>
+                        <video class="w-[256px] rounded-lg" controls src="src/vid/card-1-3-1.mp4"></video>
+                        <div class="h-8"></div>
+                        <h1 class="font-bold text-amber-500 text-4xl text-sd">红色KG</h1>
+                        <p class="my-2">Social Credit +114514 👍</p>
+                        <video class="w-[256px] rounded-lg" controls src="src/vid/card-1-3-2.mp4"></video>
+                        <div class="h-8"></div>
+                        <h1 class="font-bold text-amber-500 text-4xl text-sd">火车KG</h1>
+                        <p class="my-2">混音比较谔谔</p>
+                        <video class="rounded-lg" controls src="src/vid/card-1-3-3.mp4"></video>
+                        <div class="h-12"></div>
+                        <h1 class="font-bold text-amber-500 text-4xl text-sd">杂项</h1>
+                        <p class="my-2">一些效果不错的片段</p>
+                        <div class="h-2"></div>
+                        <p class="my-2 font-bold text-amber-500 text-2xl text-sd">沙丁鱼从地里钻了出来</p>
+                         <span>音源：</span>
+                        <a class="text-amber-500 underline"
+                            href="https://www.bilibili.com/video/BV17g4y1j7tZ/">https://www.bilibili.com/video/BV17g4y1j7tZ/</a>
+                        <p class="my-2">这个片段所用的音源是直接用SV导出的干声，很好地诠释了音源的重要性</p>
+                        <audio class="my-2" controls src="src/aud/card-1-3-3.mp3"></audio>
+                        <div class="h-2"></div>
+                        <p class="my-2 font-bold text-amber-500 text-2xl text-sd">深海少女</p>
+                        <audio class="my-2" controls src="src/aud/card-1-3-1.mp3"></audio>
+                        <div class="h-2"></div>
+                        <p class="my-2 font-bold text-amber-500 text-2xl text-sd">这么可爱真是抱歉</p>
+                        <p class="my-2">这个是so-vits-svc 3.0的KG模型的转换结果，已混音</p>
+                        <audio class="my-2" controls src="src/aud/card-1-3-2.mp3"></audio>
+                        <div class="h-2"></div>
+                        <p class="my-2 font-bold text-amber-500 text-2xl text-sd">鸡哥开场白</p>
+                        <p class="my-2">语音转换示例</p>
+                        <audio class="my-2" controls src="src/aud/card-1-3-4.mp3"></audio>
+                    </div>
+                </div>
+            </div>
+
+            <!-- cardTwo -->
+            <div x-effect="cardClose()" x-data="cardData('cardTwo')"
+                class="relative w-11/12 m-auto my-6 bg-white rounded-lg shadow-lg">
+                <!-- top-bar -->
+                <div class="flex m-auto h-32 bg-gradient-to-r from-lime-500 to-cyan-500 rounded-lg overflow-hidden">
+                    <!-- head-img -->
+                    <div @click="cardToggle('main')" class="flex-none">
+                        <img class="h-full" src="src/img/card-2-0.png" alt="RAP KG" />
+                        <p class="relative left-2 bottom-10 font-bold text-amber-500 text-3xl text-sd hover:underline">
+                            RAP KG</p>
+                    </div>
+                    <div class="flex-none w-3"></div>
+                    <!-- img-card-row -->
+                    <div class="flex flex-row w-full py-3 overflow-x-auto no-scrollbar box">
+                        <div @click="cardToggle('card1')" class="flex-none rounded-lg overflow-hidden mx-2 shadow-md">
+                            <img class="h-full" src="src/img/card-2-1.png" alt="KG RAP" />
+                            <p
+                                class="relative left-2 bottom-7 font-bold text-amber-500 text-lg text-sd hover:underline">
+                                KG RAP</p>
+                        </div>
+                        <div @click="cardToggle('card2')" class="flex-none rounded-lg overflow-hidden mx-2 shadow-md">
+                            <img class="h-full" src="src/img/card-2-2.png" alt="延误KG" />
+                            <p
+                                class="relative left-2 bottom-7 font-bold text-amber-500 text-lg text-sd hover:underline">
+                                延误KG</p>
+                        </div>
+                        <div @click="cardToggle('card3')" class="flex-none rounded-lg overflow-hidden mx-2 shadow-md">
+                            <img class="h-full" src="src/img/card-2-3.png" alt="中り考り" />
+                            <p
+                                class="relative left-2 bottom-7 font-bold text-amber-500 text-lg text-sd hover:underline">
+                                中り考り</p>
+                        </div>
+                    </div>
+
+                    <div @click="cardOpen()" class="flex-none h-max w-10 py-12">
+                        <p x-text="cardSymbol" class="text-center text-white font-bold text-2xl"></p>
+                    </div>
+                </div>
+
+                <div :class="cardIsOpen ? 'max-h-[54vh]' : 'max-h-0' " class="trans overflow-y-auto no-scrollbar">
+
+                    <!-- main -->
+                    <div x-data="cardPages('main')" x-transition.origin.top x-show="cardIsShow()" class="p-4">
+                        <h1 class="font-bold text-amber-500 text-4xl text-sd">RAP KG</h1>
+                        <p class="my-2">贼帅</p>
+                        <div class="w-full h-20 my-4 bg-cover bg-center rounded-md overflow-hidden"
+                            style="background-image: url(src/img/card-2-1.png)">
+                            <div @click="cardToggle('card1')" class="flex h-full w-full backdrop-blur-sm rounded-md">
+                                <p class="m-6 font-bold text-amber-500 text-2xl text-sd hover:underline">KG RAP</p>
+                                <div class="grow"></div>
+                                <p class="m-6 align-middle font-bold text-amber-500 text-2xl text-sd">></p>
+                            </div>
+                        </div>
+                        <div class="w-full h-20 my-4 bg-cover bg-center rounded-md overflow-hidden"
+                            style="background-image: url(src/img/card-2-2.png)">
+                            <div @click="cardToggle('card2')" class="flex h-full w-full backdrop-blur-sm rounded-md">
+                                <p class="m-6 font-bold text-amber-500 text-2xl text-sd hover:underline">延误KG</p>
+                                <div class="grow"></div>
+                                <p class="m-6 align-middle font-bold text-amber-500 text-2xl text-sd">></p>
+                            </div>
+                        </div>
+                        <div class="w-full h-20 my-4 bg-cover bg-center rounded-md overflow-hidden"
+                            style="background-image: url(src/img/card-2-3.png)">
+                            <div @click="cardToggle('card3')" class="flex h-full w-full backdrop-blur-sm rounded-md">
+                                <p class="m-6 font-bold text-amber-500 text-2xl text-sd hover:underline">中り考り</p>
+                                <div class="grow"></div>
+                                <p class="m-6 align-middle font-bold text-amber-500 text-2xl text-sd">></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- card1 -->
+                    <div x-data="cardPages('card1')" x-transition.origin.top x-show="cardIsShow()" class="p-4">
+                        <h1 class="mb-2 font-bold text-amber-500 text-4xl text-sd">KG RAP</h1>
+                        <a class="text-amber-500 underline"
+                            href="https://mp.weixin.qq.com/s/OiVqXwgml67M5mv9XYYBsA">挥洒青春，拥抱梦想——记昆仑学校九年级线上级会暨中考20天冲刺动员大会</a><span>
+                            节选</span>
+                        <video class="my-2 rounded-lg" controls src="src/vid/card-2-1.mp4"></video>
+                    </div>
+
+                    <!-- card2 -->
+                    <div x-data="cardPages('card2')" x-transition.origin.top x-show="cardIsShow()" class="p-4">
+                        <h1 class="font-bold text-amber-500 text-4xl text-sd">延误KG</h1>
+                        <p class="my-2">人力调得有点烂...</p>
+                        <video class="rounded-lg" controls src="src/vid/card-2-2.mp4"></video>
+                    </div>
+
+                    <!-- card3 -->
+                    <div x-data="cardPages('card3')" x-transition.origin.top x-show="cardIsShow()" class="p-4">
+                        <h1 class="font-bold text-amber-500 text-4xl text-sd">中り考り</h1>
+                        <p class="my-2">各位同学好</p>
+                        <video class="rounded-lg" controls src="src/vid/card-2-3.mp4"></video>
+                    </div>
+                </div>
+            </div>
+
+            <!-- cardThree -->
+            <div x-effect="cardClose()" x-data="cardData('cardThree')"
+                class="relative w-11/12 m-auto 6 bg-white rounded-lg shadow-lg">
+                <!-- top-bar -->
+                <div class="flex m-auto h-32 bg-gradient-to-r from-yellow-400 to-rose-400 rounded-lg overflow-hidden">
+                    <!-- head-img -->
+                    <div @click="cardToggle('main')" class="flex-none">
+                        <img class="h-full" src="src/img/card-3-0.png" alt="大作KG" />
+                        <p class="relative left-2 bottom-10 font-bold text-amber-500 text-3xl text-sd hover:underline">
+                            大作KG</p>
+                    </div>
+                    <div class="flex-none w-3"></div>
+                    <!-- img-card-row -->
+                    <div class="flex flex-row w-full py-3 overflow-x-auto no-scrollbar box">
+                        <div @click="cardToggle('card1')" class="flex-none rounded-lg overflow-hidden mx-2 shadow-md">
+                            <img class="h-full" src="src/img/card-3-1.png" alt="KG RAP" />
+                            <p
+                                class="relative left-2 bottom-7 font-bold text-amber-500 text-lg text-sd hover:underline">
+                                KG大作</p>
+                        </div>
+                        <div @click="cardToggle('card2')" class="flex-none rounded-lg overflow-hidden mx-2 shadow-md">
+                            <img class="h-full" src="src/img/card-3-2.png" alt="延误KG" />
+                            <p
+                                class="relative left-2 bottom-7 font-bold text-amber-500 text-lg text-sd hover:underline">
+                                乱叫KG</p>
+                        </div>
+                    </div>
+
+                    <div @click="cardOpen()" class="flex-none h-max w-10 py-12">
+                        <p x-text="cardSymbol" class="text-center text-white font-bold text-2xl"></p>
+                    </div>
+                </div>
+
+                <div :class="cardIsOpen ? 'max-h-[54vh]' : 'max-h-0' " class="trans overflow-y-auto no-scrollbar">
+
+                    <!-- main -->
+                    <div x-data="cardPages('main')" x-transition.origin.top x-show="cardIsShow()" class="p-4">
+                        <h1 class="font-bold text-amber-500 text-4xl text-sd">KG大作</h1>
+                        <p class="my-2">衔接班回忆</p>
+                        <div class="w-full h-20 my-4 bg-cover bg-center rounded-md overflow-hidden"
+                            style="background-image: url(src/img/card-3-1.png)">
+                            <div @click="cardToggle('card1')" class="flex h-full w-full backdrop-blur-sm rounded-md">
+                                <p class="m-6 font-bold text-amber-500 text-2xl text-sd hover:underline">KG大作</p>
+                                <div class="grow"></div>
+                                <p class="m-6 align-middle font-bold text-amber-500 text-2xl text-sd">></p>
+                            </div>
+                        </div>
+                        <div class="w-full h-20 my-4 bg-cover bg-center rounded-md overflow-hidden"
+                            style="background-image: url(src/img/card-3-2.png)">
+                            <div @click="cardToggle('card2')" class="flex h-full w-full backdrop-blur-sm rounded-md">
+                                <p class="m-6 font-bold text-amber-500 text-2xl text-sd hover:underline">乱叫KG</p>
+                                <div class="grow"></div>
+                                <p class="m-6 align-middle font-bold text-amber-500 text-2xl text-sd">></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- card1 -->
+                    <div x-data="cardPages('card1')" x-transition.origin.top x-show="cardIsShow()" class="p-4">
+                        <h1 class="mb-2 font-bold text-amber-500 text-4xl text-sd">KG大作</h1>
+                        <p class="my-2">衔接班回忆</p>
+                        <p class="my-2">强烈建议和配音一起食用，边看边听效果更佳，更易get梗!</p>
+                        <img class="my-2 w-[256px] rounded-lg" src="src/img/card-3-1.png" alt="KG大作" />
+                        <audio class="my-2" controls src="src/aud/card-3-1.mp3"></audio>
+                        <div class="h-6"></div>
+                        <div class="pl-4 pr-4">
+                            <h1 class="mb-2 font-bold text-3xl text-center">The magical adventure of a bird</h1>
+                            <p class="texts">Long long ago, a baby, who called Shaby has a tall lemon tree. There are often many birds in the tree, which stand for students.</p>
+                            <p class="texts">One day, Shaby wants to eat the lemons. At first, she sees many birds in the tree. So she becomes angry and shouts: “Fuck you!” All birds fly out the tree. However, the last bird is caught by the baby. The baby played it, which is died soon because of fucking.</p>
+                            <p class="texts">The other birds are very angry. He wants to kill that fucking bitch. But he hasn’t enough power. So, he flew into the rocket and come to the moon to look for help.</p>
+                            <p class="texts">In the moon, he finds a factory which is used to produce “Super perfect excellent ball”. The bird heard the leader to the factory is making a speech in Chinese : “实际上呢：虽然现在的柯穴家还不能生产完美 “完美的球”，但我，怎样？希望，在座有人，能为我们郭家，在天王星建立工厂生产完美 “完美的球”，DO WA↑！”</p>
+                            <p class="texts">“He is so clever and handsome. Maybe he can help me!” The bird thought. After the speech, the bird tells his friends that to him. During the talk, the bird know that the man is called Appreciate Sun and surprised to find he can understand the bird’s language. “实际上呢：不要用三维的思维看这个故事，怎样? Don’t break Ci Yuan Bi!” </p>
+                            <p class="texts">“So how can you help me?” Appreciate Sun give the bird a box. “If you have some problem, just said ‘Shang↑ Ke↓’, the box will help you. Remember: don’t say ‘Shang Ke’ but say ‘Shang↑ Ke↓’!”</p>
+                            <p class="texts">“Thanks! Kind man!” The bird left happily, but the man stops him “Shaby is so fucking strong, you need more help: To find a lab called “Do La~~.” I have a friend who can help you in there. By the way, take a ‘super perfect excellent ball’. ”The bird left the moon by the rocket called “shi Yi↓” from Appreciate Sun. After 3 seconds, he found that lab.</p>
+                            <p class="texts">A man is on the back of the horse and do some experiments. “滴定↑↘→~滴定↗↘管↘→~” The bird can’t help laughing because of his voice. “Why do you do the experiments on the horse?” “Because ‘问题马↘↗上↗可以 解决↘↗↘→！’” </p>
+                            <p class="texts">“I need your help! Appreciate Sun said you can help me!” The bird tells the story to that man. “I will help you, poor bird~ You can call me the brother of Mn.” “Mn?” “锰” “Chemistry is so difficult~ ” </p>
+                            <p class="texts">“Don’t worry. You can remember 浓硫酸 de↗↘性↗ji↓ which can help you beat Shaby.” So the bird take a bottle of 浓硫酸. “But .”the bird ask “If Shaby use some magic to hide my 浓硫酸，how can I do？” “ji 系 ji↘!” Brother of Mn said.</p>
+                            <p class="texts">“Thank you! You just like Mr. Appreciate Sun!”  “Wait, you are a bird or a chicken?” “Bird… but some of my friend called me chicken because I like dog shout… “OK，bird, you should find a castle whose name is started by ‘硼’. And you can find a princess who can give you the last thing you need.” “硼？” “B”  “I don’t like Chemistry at all!”</p>
+                            <p class="texts">After another 3 seconds, the bird finds the castle. “Is there any other one?” “Here!” A man wore black socks and white dress come out. “Princess???” “啊我叫阿姐↗，附近的人都叫我姐↗哥~ and because I love drinking soup , they call me Tang 姐↗ or princess of Tang.” </p>
+                            <p class="texts">The bird tell the story about his adventure for beating Shaby. “好吧↘ I will help you! Because I am the princess of Ji Nan!” “What’s Ji Nan?... Well, what will you give me?” “锵锵~ The change body machine of Fake Face Knight!” “???” Err… It is a little broken, but don’t worry, it can be use! ”</p>
+                            <p class="texts"> “Thanks…” “Boom!” A big noise came in the castle. “What’s happening?” The bird flies out the castle. The enemy is coming —— Shaby! “Don’t… come… Only KA MAN Rider can beat… her…” The bird’s dying friend used his whole life to tell him the truth… And then he died…</p>
+                            <p class="texts"> “Long time no see! You fucking bitch! You will die and come to the hell!” The bird is so angry that he rushes to Shaby. “Hoho~ Fly to me but not escape?” “Don’t fly to you, how can I kill you???” “Hoho~ Fly closer~ lovely bird!”</p>
+                            <p class="texts">“Hen↗ shing↘… What?? Can’t use?” The bird can’t believe it. “Oh shit! It’s broken, I should fix it! Wait, let me see see…A axle（轴）! It needs an axle! ‘A super perfect excellent axle! ’” </p>
+                            <p class="texts">“But the ‘Super perfect excellent ball is too big! It can’t be used to be an axle!” Shaby laughed at the bird, “Giving up, and I will live you a life!”</p>
+                            <p class="texts">“浓硫酸！I can use the 「腐蚀性」 of 浓硫酸 to make a type with ‘Super perfect excellent ball’! Uh…To make a ‘Super perfect excellent axle’!”</p>
+                            <p class="texts">“No way！” The Shaby use the magic called “er er er” —— Many bottle of  “浓硫酸” come out and only one bottle is real 浓硫酸！ “Why called ‘er er er’?” The bird is curious. “Because ‘铒，铒，铒’!”（指其他杯子里装的是铒而非硫酸） </p>
+                            <p class="texts">“Don’t be happy so early! ji 系 ji↘!” The bird find the real 浓硫酸 quickly! And repair the Hen↗ shing↘ machine in 3 seconds!</p>
+                            <p class="texts">“But! You can’t Hen↗ shing↘ because you forget the last step!” Shaby shouted.</p>
+                            <p class="texts">“I won’t forget！”The bird smiled——“Shang↑Ke↓！”The box become shining and said: “How can I do for you?” “Uh…Say ‘发生甚莫事了’for ∞ times…” </p>
+                            <p class="texts">“Your death is coming!” The bird said, “KA MAN Rider 「姐骑」：Hen↗ shing↘！！！ ” With the BGM of “发生甚莫事了” The bird turn to the「姐骑」！And kill the Shaby with the gun called “隔离法！”</p>
+                            <p class="texts">“Thanks for the three men——Uh…Maybe 2 men a girl? To help me kill the bitch…I’m sorry my friend, I can’t save you… Your wife, I will take good care of! </p>
+                        </div>
+                    </div>
+
+                    <!-- card2 -->
+                    <div x-data="cardPages('card2')" x-transition.origin.top x-show="cardIsShow()" class="p-4">
+                        <h1 class="font-bold text-amber-500 text-4xl text-sd">KG怎么叫</h1>
+                        <p class="my-2">作者：
+                            <a class="text-amber-500 underline"
+                            href="https://space.bilibili.com/526305159/">亿点猛料♿TT</a>
+                        </p>
+                        <img class="my-2 w-[256px] rounded-lg" src="src/img/card-3-2-1.png" alt="净TM扯淡" />
+                        <audio class="my-2" controls src="src/aud/card-3-2.mp3"></audio>
+                    </div>
+                </div>
+            </div>
+
+            <div class="h-10"></div>
+            <div class="w-[200px] m-auto z-10" id="sakana-widget"></div>
+            <div class="relative h-10 w-11/12 m-auto my-6 bg-purple-200/60 backdrop-blur-md rounded-lg shadow-sm text-center">
+                <p class="pt-2">Contact me at chinaozy@cykg.fun</p>
+            </div>
+            <div class="h-10"></div>
+        </div>
+    </div>
+
+    <script src="//unpkg.com/alpinejs" defer></script>
+    <script src="src/main.js"></script>
+    <script>
+
+        
+        function initSakanaWidget() {
+            const widget = SakanaWidget.getCharacter('chisato');
+            widget.image = "src/img/widget1.png";
+            SakanaWidget.registerCharacter('widget1', widget);
+            widget.image = "src/img/widget2.png";
+            SakanaWidget.registerCharacter('widget2', widget);
+            new SakanaWidget({ character: 'widget1' }).mount('#sakana-widget');
+        }
+    </script>
+    <script async onload="initSakanaWidget()"
+        src="https://cdn.jsdelivr.net/npm/sakana-widget@2.7.0/lib/sakana.min.js"></script>
+</body>
+
 </html>
